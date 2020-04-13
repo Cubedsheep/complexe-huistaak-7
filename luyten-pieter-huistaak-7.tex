@@ -1,0 +1,69 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage{LATEX-PREAMBLE/language} % language and lay-out settings
+\usepackage{LATEX-PREAMBLE/imports}  % import some useful packages
+%\usepackage{LATEX-PREAMBLE/environments} % definitions for environments
+\usepackage{LATEX-PREAMBLE/definitions}  % define custom shortcuts for e.g. real numbers
+
+
+\title{Complexe analyse huistaak 7}
+\author{Pieter Luyten}
+
+\begin{document}
+
+\maketitle
+\noindent \fbox{\parbox{\linewidth}{Let $f$ be holomorphic and non-constant in a region $\Omega$. Let $C$ be a simple closed surve that encloses a region $D$ with $c \cup D \subset \Omega$. Suppose $f$ is injective on $C$. Then $f(C)$ is a simple closed curve that encloses a region $\widetilde{D}$.\\
+
+a
+
+(a) Show that the restriction of $f$ to $D$ is a bijection from $D$ to $\widetilde{D}$\\
+
+(b) Show that the inverse mapping $g:\widetilde{D} \rightarrow D$ (which exists since $f:D \rightarrow \widetilde{D}$ is a bijection by part (a)) is holomorphic and
+$$g(w) = \frac{1}{2\pi i} \oint_C \frac{zf'(z)}{f(z)-w}dz $$}}
+
+\section*{(a)}
+We apply the argument principle on the function $f(z)-w$, for a complex number $w \not \in f(C)$. Because $f$ is holomorphic and has no poles inside $\Omega$, the number of zeros ($N$) of $f(z)-w$ in $D$ is equal to:
+\begin{equation*}
+	N = \frac{1}{2\pi i} \int_{C}^{} \frac{f'(z)dz}{f(z)-w}
+\end{equation*}
+by the argument principle. We can use the substitution $u=f(z)$, $du=f'(z)dz$. 
+Observe that because $f$ is injective and $C$ is a simple closed curve, the curve $f(C)$ has no self-intersections and is also a simple closed curve.
+We get that:
+\begin{align}
+	N &= \int_{f(C)}^{} \frac{du}{u-w}\\
+	  &= \begin{cases} 0 \text{ if } u \not\in \widetilde{D}\\
+	  1 \text{ if } u \in \widetilde D\end{cases}
+	\label{eq:mult}
+\end{align}
+We conclude that if $z$ is enclosed by $C$, then $f(z)$ is enclosed by $f(C)$ and there are no other points $w \in D$ such that $f(z)=f(w)$. So $f:D \rightarrow \widetilde{D}$ is a bijection.
+
+\section*{(b)}
+Because $f$ is holomorphic and non-constant in a region $\Omega$, we have by the open mapping theorem that $f$ is open. Therefore $g=f^{-1}$ is continuous. 
+To proof that $g$ is holomorphic we try to calculate its derivative
+\begin{align*}
+	\frac{g(w)-g(w_0)}{w-w_0} &= \frac{g(w)-g(w_0)}{f(g(w))-f(g(w_0)}\\
+				  &= \frac{1}{ \frac{f(g(w))-f(g(w_0))}{g(w)-g(w_0))}}
+\end{align*}
+Because $g$ is continuous, we can calculate the limit for $w\rightarrow w_0$ as follows ($z=g(w), z_0=g(w_0)$):
+\begin{align*}
+	g'(w_0) &= \lim_{w\rightarrow w_0} \frac{1}{ \frac{f(g(w))-f(g(w_0))}{g(w)-g(w_0)}}\\
+		&= \lim_{z\rightarrow z_0} \frac{1}{ \frac{f(z)-f(z_0)}{z-z_0}}\\
+		&= \frac{1}{f'(z_0)}\\
+		&= \frac{1}{f'(g(w_0))}
+\end{align*}
+Where we used that $f$ is holomoprhic. This can only be done if the derivative of $f$ vanishes nowhere on $D$. 
+Suppose there is a $z_0\in D$ such that $f'(z_z)=0$, in this case the function $f(z)-f(z_0)$ has a zero with multiplicity at least 2 in $z_0$, but because of \autoref{eq:mult} this is not possible.
+We conclude that $g$ is holomorphic on $\widetilde{D}$.
+
+Using the Cauchy integral formula we have that:
+\begin{equation*}
+	g(w) = \frac{1}{2\pi i} \int_{f(C)}^{} \frac{g(\zeta)}{\zeta-w}d\zeta
+\end{equation*}
+Now substitute $\zeta$ by $f(z)$, $d\zeta = f'(z)dz$:
+\begin{equation}
+	g(w) = \frac{1}{2\pi i} \int_{C}^{} \frac{zf'(z)}{f(z)-w}dz
+\end{equation}
+which is the desired result.
+
+\end{document}
+	
